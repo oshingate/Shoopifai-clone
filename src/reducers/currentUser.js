@@ -1,8 +1,8 @@
 const initialState = {
   user: null,
   token: localStorage.getItem('authToken') || '',
-  isAuthInProgress: true
-}
+  isAuthInProgress: true,
+};
 
 function currentUser(state = initialState, action) {
   switch (action.type) {
@@ -10,25 +10,25 @@ function currentUser(state = initialState, action) {
       return {
         ...state,
         user: action.data.user,
-        isAuthInProgress: false
-      }
-    
+        isAuthInProgress: false,
+      };
+
     case 'USER_LOGIN_FAILED':
       localStorage.clear();
       return {
         ...state,
         isAuthInProgress: false,
-        user: null
-      }
-    
+        user: null,
+      };
+
     case 'LOG_OUT':
     case 'NO_TOKEN':
       return {
         ...state,
         user: null,
         isAuthInProgress: false,
-        token: ''
-      }
+        token: '',
+      };
     default:
       return state;
   }

@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import '../scss/index.scss';
-import { getCurrentUser, noToken } from '../actions'
 
-
-
+import { getCurrentUser, noToken } from '../actions';
+import '../scss/index.css';
 import HomePage from '../components/HomePage';
 
 class App extends Component {
-  state = { 
-    token: ""
-  }
+  state = {
+    token: '',
+  };
 
   componentDidMount() {
     var token = localStorage.getItem('authToken') || '';
-    if(token) {
-      this.setState({token: token})
-      this.props.dispatch(getCurrentUser())
+    if (token) {
+      this.setState({ token: token });
+      this.props.dispatch(getCurrentUser());
     } else {
       this.props.dispatch(noToken());
     }
@@ -26,7 +24,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path='/' component={HomePage} />
       </div>
     );
   }
@@ -34,14 +32,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser.user
-  }
-}
+    currentUser: state.currentUser.user,
+  };
+};
 
 export default connect(mapStateToProps)(App);
-
-
-
-
-
-  
