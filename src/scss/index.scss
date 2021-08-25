@@ -1,9 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+// @import './reset';
 body {
-  margin: 10x;
+  font-size: 20px;
 }
 
-h1 {
-  text-align: center;
-  color: gray;
-  margin-top: 50px;
+.loginSec {
+  position: relative;
+  overflow: hidden;
+  background-color: #ffa781;
+  height: 100vh;
+  width: 100%;
+  .login-circle {
+    position: absolute;
+    top: -20%;
+    right: -20%;
+
+    background-color: #ffcb67;
+    height: 45rem;
+    width: 45rem;
+    border-radius: 100%;
+  }
+  .login-arrow {
+    background-color: #084c40d7;
+    // backdrop-filter: blur(2rem);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    clip-path: polygon(0% 0%, 0% 99%, 56% 100%, 90% 33%, 70% 0%);
+  }
 }
