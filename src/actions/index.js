@@ -1,11 +1,10 @@
 import axios from 'axios';
+import { rootUrl } from '../constants/constants';
 
-const rootUrl = 'http://localhost:3000/api/v1';
-
-// const setTokenToAxios = (token) => {
-//   const newToken = localStorage.getItem('authToken') || '';
-//   axios.defaults.headers.Authorization = newToken;
-// }
+export const setTokenToAxios = (token) => {
+  const newToken = localStorage.getItem('authToken') || '';
+  axios.defaults.headers.Authorization = newToken;
+};
 
 export const getCurrentUser = () => {
   return (dispatch) => {

@@ -1,36 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 body {
   font-size: 20px;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .loginSec {
-  position: relative;
-  overflow: hidden;
-  background-color: #ffa781;
   height: 100vh;
   width: 100%;
+  background: -webkit-gradient(linear, left bottom, right top, from(rgba(0, 0, 0, 0.137)), to(rgba(0, 0, 0, 0.068))), url(../images/back.PNG);
+  background: linear-gradient(to top right, rgba(0, 0, 0, 0.137), rgba(0, 0, 0, 0.068)), url(../images/back.PNG);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.loginSec .login-circle {
-  position: absolute;
-  top: -20%;
-  right: -20%;
-  background-color: #ffcb67;
-  height: 45rem;
-  width: 45rem;
-  border-radius: 100%;
+.loginSec h2 {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
-.loginSec .login-arrow {
-  background-color: #084c40d7;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  -webkit-clip-path: polygon(0% 0%, 0% 99%, 56% 100%, 90% 33%, 70% 0%);
-          clip-path: polygon(0% 0%, 0% 99%, 56% 100%, 90% 33%, 70% 0%);
+.loginSec h6 {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.loginSec h6 span {
+  color: #084c3f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.loginSec .is-primary {
+  background-color: #084c3f;
 }
 /*# sourceMappingURL=index.css.map */

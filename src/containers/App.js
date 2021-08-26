@@ -11,7 +11,6 @@ import Signup from '../components/Signup';
 class App extends Component {
   state = {
     token: '',
-    currentPage: 'login',
   };
 
   componentDidMount() {
@@ -28,11 +27,15 @@ class App extends Component {
     return (
       <div>
         {!this.state.token ? (
-          this.state.currentPage === 'login' ? (
-            <Login />
-          ) : (
-            <Signup />
-          )
+          <>
+            <Route exact path='/'>
+              <Login />
+            </Route>
+
+            <Route exact path='/signup'>
+              <Signup />
+            </Route>
+          </>
         ) : (
           <Route exact path='/' component={HomePage} />
         )}
