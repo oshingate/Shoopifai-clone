@@ -29,6 +29,7 @@ function login(state = initialState, action) {
           return { ...state, error: { email: error } };
         });
       console.log('action');
+      break;
 
     default:
       return state;

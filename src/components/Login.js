@@ -1,10 +1,32 @@
-import { useState } from 'react';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
+import { NavLink, withRouter } from 'react-router-dom';
+import { loginUrl } from '../constants/constants';
+
+async function handleFormSubmit(email, password, setError, history) {
+  let body = { email: email, password: password };
+  let res = await axios.post(loginUrl, body);
+
+  let { token, user, error } = res.data;
+
+  if (error) {
+    setError(error);
+  } else {
+    console.log(token, user);
+    localStorage.setItem('authToken', token);
+    history.push('/');
+  }
+}
+
+//actual component
 
 const Login = (props) => {
   let [email, setEmail] = useState('oshingate@gmail.com2');
   let [password, setPassword] = useState('admin1234');
+  let [error, setError] = useState({ email: '', password: '' });
+
+  useEffect(() => {}, [email, password, error]);
 
   return (
     <>
@@ -29,8 +51,7 @@ const Login = (props) => {
               className='box'
               onSubmit={(event) => {
                 event.preventDefault();
-
-                props.dispatch({ type: 'LOGIN_ACTION', payload: {} });
+                handleFormSubmit(email, password, setError, props.history);
               }}
             >
               <div className='field'>
@@ -43,15 +64,12 @@ const Login = (props) => {
                     name='email'
                     type='email'
                     placeholder='e.g. alex@example.com'
-                    value={props.email}
+                    value={email}
                     onChange={(event) => {
-                      props.dispatch({
-                        type: 'LOGIN_FIELD_UPDATE',
-                        payload: { name: 'email', value: event.target.value },
-                      });
+                      setEmail(event.target.value);
                     }}
                   />
-                  {/* <span>{props.error.email}</span> */}
+                  <span className='error-span'>{error.email}</span>
                 </div>
               </div>
 
@@ -65,18 +83,12 @@ const Login = (props) => {
                     name='password'
                     type='password'
                     placeholder='********'
-                    value={props.value}
+                    value={password}
                     onChange={(event) => {
-                      props.dispatch({
-                        type: 'LOGIN_FIELD_UPDATE',
-                        payload: {
-                          name: 'password',
-                          value: event.target.value,
-                        },
-                      });
+                      setPassword(event.target.value);
                     }}
                   />
-                  {/* <span>{props.error.password}</span> */}
+                  <span className='error-span'>{error.password}</span>
                 </div>
               </div>
 
@@ -98,14 +110,4 @@ const Login = (props) => {
   );
 };
 
-// function handleSubmit() {}
-
-function mapStateToProps(state) {
-  return {
-    email: state.login.email,
-    password: state.login.password,
-    error: state.login.error,
-  };
-}
-
-export default connect(mapStateToProps)(Login);
+export default withRouter(Login);

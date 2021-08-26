@@ -95,7 +95,7 @@ const Signup = (props) => {
             </form>
             <div className='box'>
               <h6>
-                Already have account ? <NavLink to='/'> Log-In </NavLink>
+                Already have account ? <NavLink to='/login'> Log-In </NavLink>
                 here.
               </h6>
             </div>

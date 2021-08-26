@@ -31,4 +31,9 @@ body {
 .loginSec .is-primary {
   background-color: #084c3f;
 }
+
+.loginSec .error-span {
+  color: red;
+  font-size: 0.6rem;
+}
 /*# sourceMappingURL=index.css.map */

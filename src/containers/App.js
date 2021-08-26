@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { getCurrentUser, noToken } from '../actions';
 import '../scss/index.css';
@@ -11,6 +11,7 @@ import Signup from '../components/Signup';
 class App extends Component {
   state = {
     token: '',
+    isLogged: false,
   };
 
   componentDidMount() {
@@ -26,8 +27,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        {!this.state.token ? (
-          <>
+        {!this.state.isLogged ? (
+          <Switch>
             <Route exact path='/'>
               <Login />
             </Route>
@@ -35,7 +36,7 @@ class App extends Component {
             <Route exact path='/signup'>
               <Signup />
             </Route>
-          </>
+          </Switch>
         ) : (
           <Route exact path='/' component={HomePage} />
         )}
