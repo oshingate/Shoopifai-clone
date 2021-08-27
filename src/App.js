@@ -34,16 +34,27 @@ class App extends Component {
     }
   }
 
-  updateIsLoggedIn = (value, user) => {
-    this.setState({ isLogged: value, user });
+  updateIsLoggedIn = (value, user, history, token) => {
+    if (value) {
+      this.setState({ token: token, isLogged: value, user });
+    } else {
+      localStorage.setItem('authToken', '');
+      this.setState({ isLogged: Boolean(value), user: null, token: '' });
+      history.push('/login');
+    }
   };
 
   render() {
     let user = { token: this.state.token, user: this.state.user };
+
     return (
       <UserProvider value={user}>
         <>
-          <Header isLogged={this.state.isLogged} user={user.user}></Header>
+          <Header
+            isLogged={this.state.isLogged}
+            user={user.user}
+            updateIsLoggedIn={this.updateIsLoggedIn}
+          ></Header>
           <main>
             {this.state.isLogged ? (
               <AuthorizedApp />
@@ -61,11 +72,11 @@ function UnAuthorizedApp(props) {
   return (
     <Switch>
       <Route exact path='/' component={HomePage} />
-      <Route exact path='/login'>
+      <Route path='/login'>
         <Login updateIsLoggedIn={props.updateIsLoggedIn} />
       </Route>
 
-      <Route exact path='/signup'>
+      <Route path='/signup'>
         <Signup />
       </Route>
 
@@ -78,9 +89,11 @@ function UnAuthorizedApp(props) {
 function AuthorizedApp(props) {
   return (
     <Switch>
-      <Route exact path='/' component={HomePage} />
+      <Route exact path='/'>
+        <HomePage />
+      </Route>
 
-      <Route path='*'>
+      <Route exact path='*'>
         <ErrorPage></ErrorPage>
       </Route>
     </Switch>

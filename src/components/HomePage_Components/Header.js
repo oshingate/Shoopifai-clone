@@ -1,7 +1,7 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 const Header = (props) => {
-  console.log('rendered header', props);
+  //   console.log('rendered header', props);
   return (
     <header className='header p-1'>
       <div className='columns p-1 m-auto'>
@@ -28,10 +28,19 @@ const Header = (props) => {
                 </span>
               </div>
             </div>
-            <div className='column is-one-fifth '>
+            <div className='column is-one-fifth is-flex '>
               <h3 className='has-text-weight-semibold is-size-6 has-text-centered'>
                 {props.user.username}
               </h3>
+              <button
+                onClick={(event) => {
+                  props.updateIsLoggedIn(false, props.user, props.history);
+                }}
+                to='/signup'
+                className='button is-success is-active is-small ml-3'
+              >
+                logout
+              </button>
             </div>
           </>
         ) : (
@@ -55,4 +64,4 @@ const Header = (props) => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

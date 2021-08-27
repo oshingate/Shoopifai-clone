@@ -7,7 +7,7 @@ async function handleSignup(email, password, username, setError, history) {
   let body = { email, password, username };
   let res = await axios.post(signupUrl, body);
 
-  let { user, error } = res.data;
+  let { error } = res.data;
 
   if (error) {
     console.log(error);

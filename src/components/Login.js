@@ -19,9 +19,8 @@ async function handleFormSubmit(
   if (error) {
     setError(error);
   } else {
-    console.log(token, user);
     localStorage.setItem('authToken', token);
-    updateIsLoggedIn(true, user);
+    updateIsLoggedIn(true, user, null, token);
 
     history.push('/');
   }
