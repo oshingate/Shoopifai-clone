@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bulma/css/bulma.min.css';
-import App from './containers/App';
 
-import Wrapper from './Wrapper';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 
 ReactDOM.render(
-  <Wrapper>
+  <BrowserRouter>
     <App />
-  </Wrapper>,
+  </BrowserRouter>,
   document.getElementById('root')
 );

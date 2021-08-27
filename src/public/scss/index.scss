@@ -1,10 +1,13 @@
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
-// @import './reset';
 body {
   font-size: 20px;
   font-family: 'Noto Sans JP', sans-serif;
+}
+.header {
+  background-color: white;
+}
+main {
+  background-color: #f6f6f7;
+  min-height: 80vh;
 }
 
 .loginSec {
@@ -12,8 +15,8 @@ body {
   width: 100%;
   background: linear-gradient(
       to top right,
-      rgba(0, 0, 0, 0.137),
-      rgba(0, 0, 0, 0.068)
+      rgba(0, 0, 0, 0.063),
+      rgba(0, 0, 0, 0.092)
     ),
     url(../images/back.PNG);
   background-size: cover;
@@ -34,5 +37,9 @@ body {
   }
   .is-primary {
     background-color: #084c3f;
+  }
+  .error-span {
+    color: red;
+    font-size: 0.6rem;
   }
 }
