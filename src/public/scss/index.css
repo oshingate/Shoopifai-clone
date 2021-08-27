@@ -3,11 +3,20 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
+.header {
+  background-color: white;
+}
+
+main {
+  background-color: #f6f6f7;
+  min-height: 80vh;
+}
+
 .loginSec {
   height: 100vh;
   width: 100%;
-  background: -webkit-gradient(linear, left bottom, right top, from(rgba(0, 0, 0, 0.137)), to(rgba(0, 0, 0, 0.068))), url(../images/back.PNG);
-  background: linear-gradient(to top right, rgba(0, 0, 0, 0.137), rgba(0, 0, 0, 0.068)), url(../images/back.PNG);
+  background: -webkit-gradient(linear, left bottom, right top, from(rgba(0, 0, 0, 0.063)), to(rgba(0, 0, 0, 0.092))), url(../images/back.PNG);
+  background: linear-gradient(to top right, rgba(0, 0, 0, 0.063), rgba(0, 0, 0, 0.092)), url(../images/back.PNG);
   background-size: cover;
   background-repeat: no-repeat;
 }

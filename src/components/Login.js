@@ -4,7 +4,13 @@ import { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { loginUrl } from '../constants/constants';
 
-async function handleFormSubmit(email, password, setError, history) {
+async function handleFormSubmit(
+  email,
+  password,
+  setError,
+  history,
+  updateIsLoggedIn
+) {
   let body = { email: email, password: password };
   let res = await axios.post(loginUrl, body);
 
@@ -15,6 +21,8 @@ async function handleFormSubmit(email, password, setError, history) {
   } else {
     console.log(token, user);
     localStorage.setItem('authToken', token);
+    updateIsLoggedIn(true, user);
+
     history.push('/');
   }
 }
@@ -33,12 +41,12 @@ const Login = (props) => {
       <section className='loginSec'>
         <div className='columns'>
           <div className='column auto'></div>
-          <div className='column box is-two-fifths mt-40 '>
+          <div className='column box is-two-fifths mt-6 '>
             <div className='is-flex is-align-content-center'>
               <div>
                 {' '}
                 <img
-                  className='mx-auto h-12 w-auto'
+                  className='image is-48x48'
                   src='https://d29fhpw069ctt2.cloudfront.net/icon/image/38692/preview.svg'
                   alt='Workflow'
                 />
@@ -51,7 +59,13 @@ const Login = (props) => {
               className='box'
               onSubmit={(event) => {
                 event.preventDefault();
-                handleFormSubmit(email, password, setError, props.history);
+                handleFormSubmit(
+                  email,
+                  password,
+                  setError,
+                  props.history,
+                  props.updateIsLoggedIn
+                );
               }}
             >
               <div className='field'>
@@ -99,6 +113,9 @@ const Login = (props) => {
             <div className='box'>
               <h6>
                 New to Shoopify ? <NavLink to='/signup'> Sign-Up</NavLink> here.
+              </h6>
+              <h6>
+                <NavLink to='/'> Go To Home</NavLink> .
               </h6>
             </div>
           </div>
