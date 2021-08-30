@@ -1,3 +1,95 @@
+.aside-sec {
+  border-right: 1px solid #b4b4b4;
+  min-height: 92vh;
+}
+
+.aside-sec .pri-nav ul {
+  display: none;
+}
+
+.aside-sec .pri-nav a {
+  color: #5c5f62;
+  border-left: 4px solid #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.aside-sec .pri-nav a i {
+  padding: 0.5rem 1rem;
+}
+
+.aside-sec .pri-nav .sec-nav {
+  padding-left: 4rem;
+}
+
+.aside-sec .pri-nav .sec-nav a {
+  font-size: 0.7rem;
+}
+
+.aside-sec .active ul {
+  display: inline-block;
+}
+
+.aside-sec .active i {
+  color: #008060;
+}
+
+.aside-sec .sec-active span {
+  color: #008060;
+}
+
+.admin-home-sec .admin-home-div {
+  max-width: 800px;
+  margin: 0 auto;
+  height: 40vh;
+}
+
+.admin-home-sec .demo-period {
+  background-color: #202123;
+  color: white;
+}
+
+.admin-products-sec .product-sec-buttons button {
+  font-weight: 700;
+}
+
+.admin-products-sec .product-list .product-list__header {
+  border-bottom: 1px solid gray;
+}
+
+.admin-products-sec .product-list .product-list__header button {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: grey;
+  padding-bottom: 1.5rem;
+}
+
+.admin-products-sec .product-list .product-list__header button:hover {
+  border-bottom: 3px solid gray;
+}
+
+.admin-products-sec .product-list .product-list__header .active {
+  color: black;
+  border-bottom: 3px solid #008060;
+}
+
+.admin-products-sec .product-list .product-list__filters input {
+  padding: 1rem;
+}
+
+.admin-products-sec .product-list .product-list__filters button {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.admin-products-sec .product-list .product-list__filters .right {
+  margin-right: 1rem;
+}
+
+.admin-products-sec .product-list .product-list__filters .right span {
+  margin-left: 0.5rem;
+}
+
 body {
   font-size: 20px;
   font-family: 'Noto Sans JP', sans-serif;
@@ -5,6 +97,8 @@ body {
 
 .header {
   background-color: white;
+  position: fixed;
+  width: 100%;
 }
 
 .header .column {
@@ -13,7 +107,7 @@ body {
 
 main {
   background-color: #f6f6f7;
-  min-height: 80vh;
+  min-height: 95vh;
 }
 
 .loginSec {
@@ -48,5 +142,9 @@ main {
 .loginSec .error-span {
   color: red;
   font-size: 0.6rem;
+}
+
+main {
+  padding-top: 4rem;
 }
 /*# sourceMappingURL=index.css.map */

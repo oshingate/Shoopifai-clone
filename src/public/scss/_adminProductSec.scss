@@ -1,0 +1,43 @@
+.admin-products-sec {
+  .product-sec-buttons {
+    button {
+      font-weight: 700;
+    }
+  }
+
+  .product-list {
+    .product-list__header {
+      border-bottom: 1px solid gray;
+      button {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: grey;
+        padding-bottom: 1.5rem;
+        &:hover {
+          border-bottom: 3px solid gray;
+        }
+      }
+      .active {
+        color: black;
+        border-bottom: 3px solid #008060;
+      }
+    }
+    .product-list__filters {
+      input {
+        padding: 1rem;
+        &::placeholder {
+        }
+      }
+      button {
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .right {
+        margin-right: 1rem;
+        span {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}

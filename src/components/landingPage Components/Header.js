@@ -3,7 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 const Header = (props) => {
   //   console.log('rendered header', props);
   return (
-    <header className='header p-1'>
+    <header className='header p-1 pt-4 '>
       <div className='columns p-1 m-auto'>
         <div className='column is-one-fifth is-flex is-justify-content-flex-start is-align-content-center '>
           {' '}

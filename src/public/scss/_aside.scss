@@ -1,0 +1,38 @@
+.aside-sec {
+  border-right: 1px solid rgb(180, 180, 180);
+  min-height: 92vh;
+  .pri-nav {
+    ul {
+      display: none;
+    }
+    a {
+      color: #5c5f62;
+      border-left: 4px solid #ffffff;
+      font-size: 0.9rem;
+      font-weight: 500;
+      i {
+        padding: 0.5rem 1rem;
+      }
+    }
+    .sec-nav {
+      padding-left: 4rem;
+      a {
+        font-size: 0.7rem;
+      }
+    }
+  }
+  .active {
+    ul {
+      display: inline-block;
+    }
+    i {
+      color: #008060;
+    }
+  }
+  .sec-active {
+    span {
+      //   border-left: 4px solid #008060;
+      color: #008060;
+    }
+  }
+}
