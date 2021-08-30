@@ -5,11 +5,12 @@ import { Route, Switch } from 'react-router-dom';
 import './public/scss/index.css';
 import { rootUrl } from './constants/constants';
 import { UserProvider } from './contexts/UserContext';
-import Login from './components/Login';
-import HomePage from './components/HomePage';
-import Signup from './components/Signup';
+import Login from './components/landingPage Components/Login';
+import LandingPage from './components/landingPage Components/LandingPage';
+import Signup from './components/landingPage Components/Signup';
+import AdminLandingPage from './components/admin_home_page_components/AdminLandingPage';
 import ErrorPage from './components/ErrorPage';
-import Header from './components/HomePage_Components/Header';
+import Header from './components/landingPage Components/Header';
 
 class App extends Component {
   state = {
@@ -55,9 +56,11 @@ class App extends Component {
             user={user.user}
             updateIsLoggedIn={this.updateIsLoggedIn}
           ></Header>
-          <main>
+          <main className='columns  '>
             {this.state.isLogged ? (
-              <AuthorizedApp />
+              <>
+                <AuthorizedApp />
+              </>
             ) : (
               <UnAuthorizedApp updateIsLoggedIn={this.updateIsLoggedIn} />
             )}
@@ -68,10 +71,28 @@ class App extends Component {
   }
 }
 
+//component to handle logged routes
+
+function AuthorizedApp(props) {
+  return (
+    <Switch>
+      <Route path='/admin'>
+        <AdminLandingPage />
+      </Route>
+
+      <Route exact path='*'>
+        <ErrorPage fallbackURL='/' />
+      </Route>
+    </Switch>
+  );
+}
+
+//component to handle non logged routes
+
 function UnAuthorizedApp(props) {
   return (
     <Switch>
-      <Route exact path='/' component={HomePage} />
+      <Route exact path='/' component={LandingPage} />
       <Route path='/login'>
         <Login updateIsLoggedIn={props.updateIsLoggedIn} />
       </Route>
@@ -81,22 +102,10 @@ function UnAuthorizedApp(props) {
       </Route>
 
       <Route path='*'>
-        <ErrorPage></ErrorPage>
+        <ErrorPage fallbackURL='/' />
       </Route>
     </Switch>
   );
 }
-function AuthorizedApp(props) {
-  return (
-    <Switch>
-      <Route exact path='/'>
-        <HomePage />
-      </Route>
 
-      <Route exact path='*'>
-        <ErrorPage></ErrorPage>
-      </Route>
-    </Switch>
-  );
-}
 export default App;

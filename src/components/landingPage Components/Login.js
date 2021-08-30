@@ -1,35 +1,46 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+
 import { NavLink, withRouter } from 'react-router-dom';
-import { signupUrl } from '../constants/constants';
+import { loginUrl } from '../../constants/constants';
 
-async function handleSignup(email, password, username, setError, history) {
-  let body = { email, password, username };
-  let res = await axios.post(signupUrl, body);
+async function handleFormSubmit(
+  email,
+  password,
+  setError,
+  history,
+  updateIsLoggedIn
+) {
+  let body = { email: email, password: password };
+  let res = await axios.post(loginUrl, body);
 
-  let { error } = res.data;
+  let { token, user, error } = res.data;
 
   if (error) {
-    console.log(error);
     setError(error);
   } else {
-    history.push('/');
+    localStorage.setItem('authToken', token);
+    updateIsLoggedIn(true, user, null, token);
+
+    history.push('/admin');
   }
 }
 
-const Signup = (props) => {
-  let [email, setEmail] = useState('');
-  let [username, setUsername] = useState('');
-  let [password, setPassword] = useState('');
-  let [error, setError] = useState({ email: '', username: '', password: '' });
-  useEffect(() => {}, [email, password, username, error]);
+//actual component
+
+const Login = (props) => {
+  let [email, setEmail] = useState('oshingate@gmail.com2');
+  let [password, setPassword] = useState('admin1234');
+  let [error, setError] = useState({ email: '', password: '' });
+
+  useEffect(() => {}, [email, password, error]);
 
   return (
     <>
       <section className='loginSec'>
         <div className='columns'>
           <div className='column auto'></div>
-          <div className='column box is-two-fifths mt-6'>
+          <div className='column box is-two-fifths mt-6 '>
             <div className='is-flex is-align-content-center'>
               <div>
                 {' '}
@@ -47,12 +58,12 @@ const Signup = (props) => {
               className='box'
               onSubmit={(event) => {
                 event.preventDefault();
-                handleSignup(
+                handleFormSubmit(
                   email,
                   password,
-                  username,
                   setError,
-                  props.history
+                  props.history,
+                  props.updateIsLoggedIn
                 );
               }}
             >
@@ -76,25 +87,6 @@ const Signup = (props) => {
               </div>
 
               <div className='field'>
-                <label className='label' htmlFor='username'>
-                  Username
-                </label>
-                <div className='control'>
-                  <input
-                    className='input'
-                    name='username'
-                    type='text'
-                    placeholder='enter username'
-                    value={username}
-                    onChange={(event) => {
-                      setUsername(event.target.value);
-                    }}
-                  />
-                  <span className='error-span'>{error.username}</span>
-                </div>
-              </div>
-
-              <div className='field'>
                 <label className='label' htmlFor='password'>
                   Password
                 </label>
@@ -113,12 +105,13 @@ const Signup = (props) => {
                 </div>
               </div>
 
-              <button className='button is-primary'>Sign-Up</button>
+              <button type='submit' className='button is-primary'>
+                Log in
+              </button>
             </form>
             <div className='box'>
               <h6>
-                Already have account ? <NavLink to='/login'> Log-In </NavLink>
-                here.
+                New to Shoopify ? <NavLink to='/signup'> Sign-Up</NavLink> here.
               </h6>
               <h6>
                 <NavLink to='/'> Go To Home</NavLink> .
@@ -133,4 +126,4 @@ const Signup = (props) => {
   );
 };
 
-export default withRouter(Signup);
+export default withRouter(Login);
