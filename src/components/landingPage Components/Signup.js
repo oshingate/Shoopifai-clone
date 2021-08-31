@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { signupUrl } from '../../constants/constants';
 
-
 async function handleSignup(email, password, username, setError, history) {
   let body = { email, password, username };
   let res = await axios.post(signupUrl, body);
@@ -24,6 +23,13 @@ const Signup = (props) => {
   let [password, setPassword] = useState('');
   let [error, setError] = useState({ email: '', username: '', password: '' });
   useEffect(() => {}, [email, password, username, error]);
+
+  let header = document.querySelector('.header');
+  let main = document.querySelector('.main');
+  if (header && main) {
+    main.classList.add('pt-0');
+    header.style.display = 'none';
+  }
 
   return (
     <>

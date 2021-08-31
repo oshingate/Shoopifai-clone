@@ -35,6 +35,13 @@ const Login = (props) => {
 
   useEffect(() => {}, [email, password, error]);
 
+  let main = document.querySelector('.main');
+  if (main) {
+    main.classList.add('pt-0');
+  }
+
+  // console.dir(main);
+
   return (
     <>
       <section className='loginSec'>

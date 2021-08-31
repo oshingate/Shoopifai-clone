@@ -17,25 +17,25 @@ const AdminProductListFilter = (props) => {
         </div>
 
         <div className='column is-two-fifths'>
-          <div class='field has-addons'>
-            <p class='control'>
-              <button class='button is-small'>
+          <div className='field has-addons'>
+            <p className='control'>
+              <button className='button is-small'>
                 <span>Product Vendor</span>
-                <span class='icon is-small'>
-                  <i class='fas fa-caret-down'></i>
+                <span className='icon is-small'>
+                  <i className='fas fa-caret-down'></i>
                 </span>
               </button>
             </p>
-            <p class='control'>
-              <button class='button is-small'>
+            <p className='control'>
+              <button className='button is-small'>
                 <span>Tagged With</span>
-                <span class='icon is-small'>
-                  <i class='fas fa-caret-down'></i>
+                <span className='icon is-small'>
+                  <i className='fas fa-caret-down'></i>
                 </span>
               </button>
             </p>
-            <p class='control'>
-              <button class='button is-small'>
+            <p className='control'>
+              <button className='button is-small'>
                 <span>More Filters</span>
               </button>
             </p>
@@ -45,14 +45,14 @@ const AdminProductListFilter = (props) => {
         <div className='column auto'>
           <ul className='is-flex'>
             <li>
-              <button class='button  is-small right'>
-                <i class='fas fa-star'></i>
+              <button className='button  is-small right'>
+                <i className='fas fa-star'></i>
                 <span>saved</span>
               </button>
             </li>
             <li>
-              <button class='button is-small right'>
-                <i class='fas fa-arrows-alt-v'></i>
+              <button className='button is-small right'>
+                <i className='fas fa-arrows-alt-v'></i>
                 <span>sort</span>
               </button>
             </li>

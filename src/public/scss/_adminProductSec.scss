@@ -1,4 +1,7 @@
 .admin-products-sec {
+  h2 {
+    color: black;
+  }
   .product-sec-buttons {
     button {
       font-weight: 700;
@@ -25,8 +28,6 @@
     .product-list__filters {
       input {
         padding: 1rem;
-        &::placeholder {
-        }
       }
       button {
         font-size: 0.85rem;
@@ -39,5 +40,21 @@
         }
       }
     }
+  }
+  .product-list__body {
+    .product-list__body--header {
+      .h4 {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: black;
+      }
+    }
+  }
+}
+
+.admin-new-product-sec {
+  hr {
+    border-bottom: 1px solid rgb(226, 224, 224);
+    margin: 0.5rem 0;
   }
 }
