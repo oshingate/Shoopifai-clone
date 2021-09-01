@@ -30,7 +30,7 @@
   display: inline-block;
 }
 
-.aside-sec .active i {
+.aside-sec .active-nav i {
   color: #008060;
 }
 
@@ -47,6 +47,14 @@
 .admin-home-sec .demo-period {
   background-color: #202123;
   color: white;
+}
+
+.admin-orders-sec {
+  background-color: white;
+}
+
+.admin-products-sec h2 {
+  color: black;
 }
 
 .admin-products-sec .product-sec-buttons button {
@@ -88,6 +96,17 @@
 
 .admin-products-sec .product-list .product-list__filters .right span {
   margin-left: 0.5rem;
+}
+
+.admin-products-sec .product-list__body .product-list__body--header .h4 {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: black;
+}
+
+.admin-new-product-sec hr {
+  border-bottom: 1px solid #e2e0e0;
+  margin: 0.5rem 0;
 }
 
 body {
@@ -144,7 +163,7 @@ main {
   font-size: 0.6rem;
 }
 
-main {
+.main {
   padding-top: 4rem;
 }
 /*# sourceMappingURL=index.css.map */

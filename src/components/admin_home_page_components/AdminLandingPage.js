@@ -4,11 +4,11 @@ import AdminHomePage from './AdminHomePage1';
 import AdminOrders from '../admin_orders_components/AdminOrders';
 import ErrorPage from '../ErrorPage';
 import AdminProducts from '../admin_products_componetns.js/Adminproducts';
+import AdminProductsNew from '../admin_products_componetns.js/admin_products_new/AdminProductsNew';
 
 const AdminLandingPage = (props) => {
   return (
     <>
-      {' '}
       <aside className=' aside-sec column auto '>
         <Aside />
       </aside>
@@ -17,11 +17,15 @@ const AdminLandingPage = (props) => {
           <Route exact path='/admin'>
             <AdminHomePage />
           </Route>
+
           <Route exact path='/admin/orders'>
             <AdminOrders />
           </Route>
           <Route exact path='/admin/products'>
             <AdminProducts />
+          </Route>
+          <Route exact path='/admin/products/new'>
+            <AdminProductsNew />
           </Route>
           <Route exact path='*'>
             <ErrorPage fallbackURL='/admin' />

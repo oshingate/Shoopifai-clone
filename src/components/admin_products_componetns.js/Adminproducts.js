@@ -1,16 +1,16 @@
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
 import AdminProductListHeader from './admin_product_list/AdminProductListHeader';
 import AdminProductListFilter from './admin_product_list/AdminProductListFilter';
+import AdminProductListBody from './admin_product_list/AdminProductListBody';
 
 const AdminProducts = (props) => {
-  //   let params = queryString.parse(props.location.search);
-
+  let [arrayOfProducts, setArrayOfProducts] = useState([]);
   let [selectedView, setSelectedView] = useState('all');
   useEffect(() => {
-    let params = queryString.parse(props.location.search);
-    setSelectedView(params.selectedView);
+    let query = queryString.parse(props.location.search);
+    setSelectedView(query.selectedView);
   }, [props.location.search]);
   console.log(selectedView);
 
@@ -26,7 +26,11 @@ const AdminProducts = (props) => {
             <button className='button is-light is-small'>Import</button>
           </li>
           <li>
-            <button className='button is-success is-small'>Add Product</button>
+            <NavLink to='/admin/products/new'>
+              <button className='button is-success is-small'>
+                Add Product
+              </button>
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -36,7 +40,10 @@ const AdminProducts = (props) => {
 
           <AdminProductListFilter />
 
-          <div className='product-list__body my-3'></div>
+          <AdminProductListBody
+            arrayOfProducts={arrayOfProducts}
+            selectedView={selectedView}
+          />
         </div>
       </div>
     </section>

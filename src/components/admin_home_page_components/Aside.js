@@ -1,19 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
-const Aside = () => {
+const Aside = (props) => {
   return (
     <nav className='is-flex is-flex-direction-column is-justify-content-space-between'>
       <ul>
-        <Home />
+        {/* <Switch> */}
+        <Home path={props.match.path} />
         <Orders />
         <Products />
         <Customers />
         <Allother />
+        {/* </Switch> */}
       </ul>
       <ul>
         <li className='pri-nav'>
           {' '}
-          <NavLink to='/admin/settings'>
+          <NavLink exact to='/admin/settings'>
             <i className='fas fa-cog'></i>Settings
           </NavLink>
         </li>
@@ -22,13 +24,16 @@ const Aside = () => {
   );
 };
 
-export default Aside;
+export default withRouter(Aside);
 
-function Home() {
+function Home(props) {
   return (
     <li className='pri-nav'>
       {' '}
-      <NavLink to='/admin'>
+      <NavLink
+        to='/admin'
+        className={props.path === '/admin' ? 'active-nav' : ''}
+      >
         <i className='fas fa-home'></i>Home
       </NavLink>
     </li>
@@ -41,6 +46,7 @@ function Orders() {
       {' '}
       <NavLink
         to='/admin/orders'
+        activeClassName='active-nav '
         onClick={(event) => {
           event.target.parentElement.classList.toggle('active');
         }}
@@ -92,6 +98,7 @@ function Products() {
         onClick={(event) => {
           event.target.parentElement.classList.toggle('active');
         }}
+        activeClassName='active-nav '
       >
         <i className='fas fa-tag'></i>Products
       </NavLink>
@@ -154,7 +161,7 @@ function Customers() {
   return (
     <li className='pri-nav'>
       {' '}
-      <NavLink to='/admin/customer'>
+      <NavLink to='/admin/customer' activeClassName='active-nav '>
         <i className='fas fa-user'></i>Customer
       </NavLink>
     </li>
@@ -166,25 +173,25 @@ function Allother() {
     <>
       <li className='pri-nav'>
         {' '}
-        <NavLink to='/admin/analytics'>
+        <NavLink to='/admin/analytics' activeClassName='active-nav '>
           <i className='fas fa-signal'></i>Analytics
         </NavLink>
       </li>
       <li className='pri-nav'>
         {' '}
-        <NavLink to='/admin/marketing'>
+        <NavLink to='/admin/marketing' activeClassName='active-nav '>
           <i className='fas fa-bullhorn'></i>Marketing
         </NavLink>
       </li>
       <li className='pri-nav'>
         {' '}
-        <NavLink to='/admin/discounts'>
+        <NavLink to='/admin/discounts' activeClassName='active-nav '>
           <i className='fas fa-percent'></i>Discounts
         </NavLink>
       </li>
       <li className='pri-nav'>
         {' '}
-        <NavLink to='/admin/apps'>
+        <NavLink to='/admin/apps' activeClassName='active-nav '>
           <i className='fab fa-app-store-ios'></i>Apps
         </NavLink>
       </li>

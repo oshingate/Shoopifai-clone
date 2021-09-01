@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import './public/scss/index.css';
 import { rootUrl } from './constants/constants';
@@ -13,11 +13,14 @@ import ErrorPage from './components/ErrorPage';
 import Header from './components/landingPage Components/Header';
 
 class App extends Component {
-  state = {
-    token: '',
-    isLogged: false,
-    user: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: '',
+      isLogged: false,
+      user: null,
+    };
+  }
 
   componentDidMount() {
     var token = localStorage.getItem('authToken') || '';
@@ -51,12 +54,15 @@ class App extends Component {
     return (
       <UserProvider value={user}>
         <>
-          <Header
-            isLogged={this.state.isLogged}
-            user={user.user}
-            updateIsLoggedIn={this.updateIsLoggedIn}
-          ></Header>
-          <main className='columns  '>
+          {this.props.location.pathname !== ('/login' || '/signup') ? (
+            <Header
+              isLogged={this.state.isLogged}
+              user={user.user}
+              updateIsLoggedIn={this.updateIsLoggedIn}
+            />
+          ) : null}
+          {/* <Header></Header> */}
+          <main className='columns main '>
             {this.state.isLogged ? (
               <>
                 <AuthorizedApp />
@@ -108,4 +114,4 @@ function UnAuthorizedApp(props) {
   );
 }
 
-export default App;
+export default withRouter(App);
