@@ -49,6 +49,19 @@
         color: black;
       }
     }
+    .product-list__body--product {
+      .checkbox,
+      .h4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .h4 {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: rgb(99, 97, 97);
+      }
+    }
   }
 }
 

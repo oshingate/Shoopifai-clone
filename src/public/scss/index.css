@@ -104,6 +104,25 @@
   color: black;
 }
 
+.admin-products-sec .product-list__body .product-list__body--product .checkbox,
+.admin-products-sec .product-list__body .product-list__body--product .h4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.admin-products-sec .product-list__body .product-list__body--product .h4 {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #636161;
+}
+
 .admin-new-product-sec hr {
   border-bottom: 1px solid #e2e0e0;
   margin: 0.5rem 0;
@@ -117,6 +136,7 @@ body {
 .header {
   background-color: white;
   position: fixed;
+  z-index: 10;
   width: 100%;
 }
 

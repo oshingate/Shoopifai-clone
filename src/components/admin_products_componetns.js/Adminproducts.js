@@ -1,18 +1,37 @@
 import { NavLink, withRouter } from 'react-router-dom';
 import queryString from 'query-string';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AdminProductListHeader from './admin_product_list/AdminProductListHeader';
 import AdminProductListFilter from './admin_product_list/AdminProductListFilter';
 import AdminProductListBody from './admin_product_list/AdminProductListBody';
+import axios from 'axios';
+import { productsUrl } from '../../constants/constants';
+import UserContext from '../../contexts/UserContext';
 
 const AdminProducts = (props) => {
-  let [arrayOfProducts, setArrayOfProducts] = useState([]);
+  let { token } = useContext(UserContext);
+  let [products, setProducts] = useState([]);
   let [selectedView, setSelectedView] = useState('all');
   useEffect(() => {
     let query = queryString.parse(props.location.search);
     setSelectedView(query.selectedView);
-  }, [props.location.search]);
-  console.log(selectedView);
+
+    async function fetchData(setProducts) {
+      let { data } = await axios.get(
+        productsUrl + `getList?selectedView=${query.selectedView}`,
+
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      setProducts(data.products);
+    }
+
+    fetchData(setProducts);
+  }, [props.location.search, token]);
 
   return (
     <section className='admin-products-sec'>
@@ -41,7 +60,7 @@ const AdminProducts = (props) => {
           <AdminProductListFilter />
 
           <AdminProductListBody
-            arrayOfProducts={arrayOfProducts}
+            products={products}
             selectedView={selectedView}
           />
         </div>
