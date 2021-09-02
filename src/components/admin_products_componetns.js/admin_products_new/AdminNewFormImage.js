@@ -1,4 +1,4 @@
-const AdminNewFormColOneBoxTwo = (props) => {
+const AdminNewFormImage = (props) => {
   return (
     <div className='box '>
       <h4>Image</h4>
@@ -9,12 +9,12 @@ const AdminNewFormColOneBoxTwo = (props) => {
               className='file-input'
               type='file'
               name='image'
-              value={props.product.image}
+              // value={props.product.image}
               onChange={(event) => {
-                props.updateState(
-                  props.setProduct,
-                  'image',
-                  event.target.value
+                props.convertImgToUrl(
+                  event,
+                  props.updateState,
+                  props.setProduct
                 );
               }}
             />
@@ -32,4 +32,4 @@ const AdminNewFormColOneBoxTwo = (props) => {
   );
 };
 
-export default AdminNewFormColOneBoxTwo;
+export default AdminNewFormImage;

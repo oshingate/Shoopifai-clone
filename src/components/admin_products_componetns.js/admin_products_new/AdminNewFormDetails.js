@@ -1,4 +1,4 @@
-const AdminNewFormColOneBoxOne = (props) => {
+const AdminNewFormDetails = (props) => {
   return (
     <div className='box'>
       <fieldset className='field'>
@@ -39,4 +39,4 @@ const AdminNewFormColOneBoxOne = (props) => {
   );
 };
 
-export default AdminNewFormColOneBoxOne;
+export default AdminNewFormDetails;
