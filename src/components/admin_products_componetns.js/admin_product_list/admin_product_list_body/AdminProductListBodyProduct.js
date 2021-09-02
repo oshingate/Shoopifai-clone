@@ -1,4 +1,5 @@
 const AdminProductListBodyProduct = (props) => {
+  // console.log(props.product);
   return (
     <div className='product-list__body--product columns'>
       <div className='column is-1 is-flex is-align-content-center is-justify-content-center'>
@@ -22,7 +23,13 @@ const AdminProductListBodyProduct = (props) => {
       </div>
       <div className='column is-1 is-flex is-align-content-center'>
         <h4 className='h4'>
-          <button class='button is-primary is-rounded is-small '>
+          <button
+            className={
+              props.product.product_status === 'active'
+                ? 'button is-success is-rounded is-small '
+                : 'button is-link is-rounded is-small '
+            }
+          >
             {props.product.product_status}
           </button>
         </h4>

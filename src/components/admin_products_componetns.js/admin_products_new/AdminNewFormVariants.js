@@ -1,3 +1,5 @@
+import AddNewVariant from './admin_new_form_variants/AddNewVariant';
+
 const AdminNewFormVariants = (props) => {
   return (
     <div className='box'>
@@ -22,6 +24,7 @@ const AdminNewFormVariants = (props) => {
         </label>
       </fieldset>
       <hr />
+      {props.product.has_variants ? <AddNewVariant /> : ''}
     </div>
   );
 };
