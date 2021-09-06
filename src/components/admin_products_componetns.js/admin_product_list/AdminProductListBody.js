@@ -7,13 +7,22 @@ const AdminProductListBody = (props) => {
       <div className='product-list__body my-3'>
         <AdminProductListBodyHeader />
         <ul>
-          {props.products.map((product) => {
-            return (
-              <li key={product.slug}>
-                <AdminProductListBodyProduct product={product} />
-              </li>
-            );
-          })}
+          {!props.isFiltered
+            ? props.products.map((product) => {
+                return (
+                  <li key={product.slug}>
+                    <AdminProductListBodyProduct product={product} />
+                  </li>
+                );
+              })
+            : props.filteredProducts.map((product) => {
+                return (
+                  <li key={product.slug}>
+                    {/* <h2>filtered</h2> */}
+                    <AdminProductListBodyProduct product={product} />
+                  </li>
+                );
+              })}
         </ul>
       </div>
     );

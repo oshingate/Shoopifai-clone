@@ -7,16 +7,21 @@ import AdminProductListBody from './admin_product_list/AdminProductListBody';
 import axios from 'axios';
 import { productsUrl } from '../../constants/constants';
 import UserContext from '../../contexts/UserContext';
+import Loader from '../Loader';
 
 const AdminProducts = (props) => {
-  let { token } = useContext(UserContext);
+  let { token, user } = useContext(UserContext);
   let [products, setProducts] = useState([]);
+  let [filteredProducts, setFilteredProducts] = useState([]);
   let [selectedView, setSelectedView] = useState('all');
+  let [isFiltered, setIsFiltered] = useState(false);
+  let [isLoading, setisLoading] = useState(true);
+
   useEffect(() => {
     let query = queryString.parse(props.location.search);
     setSelectedView(query.selectedView);
 
-    async function fetchData(setProducts) {
+    async function fetchData(setProducts, setFilteredProducts, setisLoading) {
       let { data } = await axios.get(
         productsUrl + `getList?selectedView=${query.selectedView}`,
 
@@ -28,11 +33,16 @@ const AdminProducts = (props) => {
       );
 
       setProducts(data.products);
+      setFilteredProducts([...data.products]);
+      setisLoading(false);
     }
 
-    fetchData(setProducts);
+    fetchData(setProducts, setFilteredProducts, setisLoading);
   }, [props.location.search, token]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className='admin-products-sec'>
       <div className='is-flex is-justify-content-space-between'>
@@ -57,11 +67,19 @@ const AdminProducts = (props) => {
         <div className='box product-list'>
           <AdminProductListHeader selectedView={selectedView} />
 
-          <AdminProductListFilter />
+          <AdminProductListFilter
+            setIsFiltered={setIsFiltered}
+            filteredProducts={filteredProducts}
+            setFilteredProducts={setFilteredProducts}
+            products={products}
+            user={user}
+          />
 
           <AdminProductListBody
             products={products}
             selectedView={selectedView}
+            isFiltered={isFiltered}
+            filteredProducts={filteredProducts}
           />
         </div>
       </div>

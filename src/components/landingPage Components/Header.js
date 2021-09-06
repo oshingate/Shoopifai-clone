@@ -28,10 +28,11 @@ const Header = (props) => {
                 </span>
               </div>
             </div>
-            <div className='column is-one-fifth is-flex '>
-              <h3 className='has-text-weight-semibold is-size-6 has-text-centered'>
+            <div className='column is-one-fifth is-flex is-justify-content-space-around '>
+              <h3 className='has-text-weight-semibold is-size-6 has-text-centered '>
                 {props.user.username}
               </h3>
+
               <button
                 onClick={(event) => {
                   props.updateIsLoggedIn(false, props.user, props.history);
