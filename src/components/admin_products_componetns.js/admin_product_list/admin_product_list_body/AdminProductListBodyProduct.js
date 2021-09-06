@@ -1,5 +1,6 @@
 const AdminProductListBodyProduct = (props) => {
   // console.log(props.product);
+
   return (
     <div className='product-list__body--product columns'>
       <div className='column is-1 is-flex is-align-content-center is-justify-content-center'>

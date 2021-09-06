@@ -7,6 +7,7 @@ import AdminProductListBody from './admin_product_list/AdminProductListBody';
 import axios from 'axios';
 import { productsUrl } from '../../constants/constants';
 import UserContext from '../../contexts/UserContext';
+import Loader from '../Loader';
 
 const AdminProducts = (props) => {
   let { token, user } = useContext(UserContext);
@@ -14,12 +15,13 @@ const AdminProducts = (props) => {
   let [filteredProducts, setFilteredProducts] = useState([]);
   let [selectedView, setSelectedView] = useState('all');
   let [isFiltered, setIsFiltered] = useState(false);
+  let [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     let query = queryString.parse(props.location.search);
     setSelectedView(query.selectedView);
 
-    async function fetchData(setProducts, setFilteredProducts) {
+    async function fetchData(setProducts, setFilteredProducts, setisLoading) {
       let { data } = await axios.get(
         productsUrl + `getList?selectedView=${query.selectedView}`,
 
@@ -32,11 +34,15 @@ const AdminProducts = (props) => {
 
       setProducts(data.products);
       setFilteredProducts([...data.products]);
+      setisLoading(false);
     }
 
-    fetchData(setProducts, setFilteredProducts);
+    fetchData(setProducts, setFilteredProducts, setisLoading);
   }, [props.location.search, token]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className='admin-products-sec'>
       <div className='is-flex is-justify-content-space-between'>

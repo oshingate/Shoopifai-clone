@@ -24,7 +24,15 @@ const AdminNewFormVariants = (props) => {
         </label>
       </fieldset>
       <hr />
-      {props.product.has_variants ? <AddNewVariant /> : ''}
+      {props.product.has_variants ? (
+        <AddNewVariant
+          product={props.product}
+          updateState={props.updateState}
+          setProduct={props.setProduct}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

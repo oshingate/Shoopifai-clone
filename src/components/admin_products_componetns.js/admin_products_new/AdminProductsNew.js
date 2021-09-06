@@ -3,8 +3,12 @@ import axios from 'axios';
 import { useContext } from 'react';
 
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { cloudinaryUrl, productsUrl } from '../../../constants/constants';
+import { NavLink, withRouter } from 'react-router-dom';
+import {
+  cloudinaryUrl,
+  productsUrl,
+  variantUrl,
+} from '../../../constants/constants';
 import UserContext from '../../../contexts/UserContext';
 import AdminNewFormDetails from './AdminNewFormDetails';
 import AdminNewFormImage from './AdminNewFormImage';
@@ -22,7 +26,6 @@ function updateState(setProduct, fieldName, value) {
 }
 
 async function convertImgToUrl(event, updateState, setProduct) {
-  console.log(event.target.files[0]);
   const files = event.target.files;
   let data = new FormData();
   data.append('file', files[0]);
@@ -36,18 +39,106 @@ async function convertImgToUrl(event, updateState, setProduct) {
   console.log('Data', res);
 
   let res2 = await res.json();
-  console.log(res2.secure_url);
+
   updateState(setProduct, 'image', res2.secure_url);
 }
 
 //function to handle form submition
 async function handleFormSubmit(product, token) {
+  if (product.has_variants) {
+    Object.keys(product.variants).forEach((variant) => {
+      console.log(product.variants[variant].length);
+      if (product.variants[variant].length === 0) {
+        delete product.variants[variant];
+      }
+    });
+  }
+  let variants = { ...product.variants };
+
+  delete product.variants;
+
   let newProduct = await axios.post(productsUrl, product, {
     headers: {
       Authorization: token,
     },
   });
-  console.log('newprod', newProduct.data);
+
+  let keys = Object.keys(variants);
+
+  keys.forEach((ele) => {
+    variants[ele] = variants[ele].split(',').map((elel) => {
+      return elel.trim();
+    });
+  });
+
+  if (keys.length === 1) {
+    variants[keys[0]].forEach((ele) => {
+      let data = { productName: newProduct.data.product.name, [keys[0]]: ele };
+      //creating variant
+      axios.post(variantUrl, data, {
+        headers: {
+          Authorization: token,
+        },
+      });
+    });
+  } else if (keys.length === 2) {
+    variants[keys[0]].forEach((ele1) => {
+      variants[keys[1]].forEach((ele2) => {
+        let data = {
+          productName: newProduct.data.product.name,
+          [keys[0]]: ele1,
+          [keys[1]]: ele2,
+        };
+        //creating variant
+        axios.post(variantUrl, data, {
+          headers: {
+            Authorization: token,
+          },
+        });
+      });
+    });
+  } else if (keys.length === 3) {
+    variants[keys[0]].forEach((ele1) => {
+      variants[keys[1]].forEach((ele2) => {
+        variants[keys[2]].forEach((ele3) => {
+          let data = {
+            productName: newProduct.data.product.name,
+            [keys[0]]: ele1,
+            [keys[1]]: ele2,
+            [keys[2]]: ele3,
+          };
+          //creating variant
+          axios.post(variantUrl, data, {
+            headers: {
+              Authorization: token,
+            },
+          });
+        });
+      });
+    });
+  } else if (keys.length === 4) {
+    variants[keys[0]].forEach((ele1) => {
+      variants[keys[1]].forEach((ele2) => {
+        variants[keys[2]].forEach((ele3) => {
+          variants[keys[3]].forEach((ele4) => {
+            let data = {
+              productName: newProduct.data.product.name,
+              [keys[0]]: ele1,
+              [keys[1]]: ele2,
+              [keys[2]]: ele3,
+              [keys[3]]: ele4,
+            };
+            //creating variant
+            axios.post(variantUrl, data, {
+              headers: {
+                Authorization: token,
+              },
+            });
+          });
+        });
+      });
+    });
+  }
 }
 
 const AdminProductsNew = (props) => {
@@ -66,12 +157,13 @@ const AdminProductsNew = (props) => {
     is_physical: true,
     weight: '',
     manufactured_in: '',
-    has_variants: false,
+    has_variants: true,
     product_status: 'draft',
     vendor: '',
     category_id: '',
     collections: '',
     tags: '',
+    variants: { size: '' },
   });
 
   console.log('insidenewProd', product);
@@ -117,7 +209,9 @@ const AdminProductsNew = (props) => {
             category_id: '',
             collections: '',
             tags: '',
+            variants: { size: '' },
           });
+          props.history.push('/admin/products?selectedView=all');
         }}
       >
         <div className='columns'>
@@ -205,4 +299,4 @@ const AdminProductsNew = (props) => {
   );
 };
 
-export default AdminProductsNew;
+export default withRouter(AdminProductsNew);

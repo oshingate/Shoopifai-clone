@@ -5,6 +5,7 @@ import AdminOrders from '../admin_orders_components/AdminOrders';
 import ErrorPage from '../ErrorPage';
 import AdminProducts from '../admin_products_componetns.js/Adminproducts';
 import AdminProductsNew from '../admin_products_componetns.js/admin_products_new/AdminProductsNew';
+import AdminInventoryList from '../admin_products_componetns.js/admin_inventory_components/AdminInventoryList';
 
 const AdminLandingPage = (props) => {
   return (
@@ -26,6 +27,9 @@ const AdminLandingPage = (props) => {
           </Route>
           <Route exact path='/admin/products/new'>
             <AdminProductsNew />
+          </Route>
+          <Route exact path='/admin/products/inventory'>
+            <AdminInventoryList />
           </Route>
           <Route exact path='*'>
             <ErrorPage fallbackURL='/admin' />

@@ -82,6 +82,9 @@ class App extends Component {
 function AuthorizedApp(props) {
   return (
     <Switch>
+      <Route path='/'>
+        <AdminLandingPage />
+      </Route>
       <Route path='/admin'>
         <AdminLandingPage />
       </Route>

@@ -1,9 +1,9 @@
 const AddNewVariantOption = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <div>
       <div className='is-flex is-justify-content-space-between mb-1'>
-        <span className='is-size-6 mr-2'>option 1</span>
+        <span className='is-size-6 mr-2'>option {props.index + 1}</span>
         <span className='button is-danger is-small'>remove</span>
       </div>
       <div className='columns '>
@@ -12,7 +12,7 @@ const AddNewVariantOption = (props) => {
             <select
               id='collections'
               name='collections'
-              value={props.option.by}
+              value={props.option}
               onChange={(event) => {}}
             >
               {props.arrOfVariants.map((vari) => {
@@ -35,7 +35,15 @@ const AddNewVariantOption = (props) => {
                 className='input is-small'
                 type='text'
                 placeholder='Seprate options with comma ( , )'
-                name='name'
+                name={props.option}
+                value={props.value}
+                onChange={(event) => {
+                  handleFieldChnage(
+                    props.option,
+                    event.target.value,
+                    props.setProduct
+                  );
+                }}
               />
             </div>
           </fieldset>
@@ -45,5 +53,14 @@ const AddNewVariantOption = (props) => {
     </div>
   );
 };
+
+function handleFieldChnage(option, updatedValue, setProduct) {
+  setProduct((prevState) => {
+    return {
+      ...prevState,
+      variants: { ...prevState.variants, [option]: updatedValue },
+    };
+  });
+}
 
 export default AddNewVariantOption;
