@@ -10,7 +10,7 @@ import AdminInventoryListBody from './AdminInventoryListBody';
 const AdminInventoryList = (props) => {
   let [variants, setVariants] = useState([]);
   let [isLoading, setIsLoading] = useState(true);
-  let [isFiltered, setIsFiltered] = useState(false);
+  let [isFiltered] = useState(false);
   let [filteredVariants, setFilteredVariants] = useState([]);
   let { token } = useContext(UserContext);
 

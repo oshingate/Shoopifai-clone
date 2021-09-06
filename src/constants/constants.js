@@ -1,4 +1,4 @@
-const rootUrl = 'http://localhost:4000/api/v1/';
+const rootUrl = 'https://shoopifai-api.herokuapp.com/api/v1/';
 const loginUrl = rootUrl + 'users/login/';
 const signupUrl = rootUrl + 'users/signup/';
 const categoryUrl = rootUrl + 'category/';

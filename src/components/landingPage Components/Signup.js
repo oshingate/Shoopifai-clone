@@ -13,7 +13,7 @@ async function handleSignup(email, password, username, setError, history) {
     console.log(error);
     setError(error);
   } else {
-    history.push('/');
+    history.push('/login');
   }
 }
 
